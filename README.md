@@ -103,3 +103,10 @@ as child elements of other objects.
 ## Addresses
 * [Retrieve Shipping addresses by Customer](https://github.com/PayFabric/APIs/wiki#retrieve-shipping-addresses-by-customer)
 * [Retrieve Shipping address by Id](https://github.com/PayFabric/APIs/wiki#retrieve-shipping-address-by-id)
+
+API Versions
+------------
+For our older but still supported versions of the APIs please see the below:
+
+* [Version 2.0](https://github.com/PayFabric/APIs/tree/v2)
+* [Latest Version](https://github.com/PayFabric/APIs)
