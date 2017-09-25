@@ -16,7 +16,7 @@ Address objects represent the shipping or billing address of a customer. This ob
 | Line3      | String | Street line 3 |nvarchar(128)|
 | Email      | String | Email address|nvarchar(128)|
 | Phone      | String | Phone number |varchar(16)|
-| ModifiedOn | String | Timestamp indicating when this record was last modified.It's format should like "3/23/2015 11:16:19 PM".|datetime,not null|
+| ModifiedOn | String | Timestamp indicating when this record was last modified. It's format should like "3/23/2015 11:16:19 PM".|datetime,not null|
 | Zip*        | String | Zip code |varchar(16)|
 *Required
 
@@ -101,7 +101,7 @@ The Document object is used to represent additional invoice, order, or other Lev
 | Attribute       | DataType| Definition
 | :-----------    |:---------| :---------| 
 | Head            | Array | An array of key-value pairs. Usually, the key-value pairs represent the level 2 fields to submit to the gateway.| 
-| Lines           | Array | An array of columns object.The columns objects represent the columns that belong to a specific line. Usually the columns objects represent the level 3 fields that you can submit to the gateway.|
+| Lines           | Array | An array of columns object. The columns objects represent the columns that belong to a specific line. Usually the columns objects represent the level 3 fields that you can submit to the gateway.|
 | Columns         | Array | An array of key-value pairs. The key-value pairs represent the level 3 fields to submit to the gateway.|
 | UserDefined     | String | Up to 50 key value pairs can be stored in this object.| 
 
