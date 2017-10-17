@@ -39,7 +39,7 @@ namespace Samples.Net40
                 datastring.Append("\"Cvc\":\"1453\",");
                 datastring.Append("\"Tender\":\"CreditCard\",");
                 datastring.Append("\"CardName\":\"MasterCard\",");
-                datastring.Append("\"ExpDate\":\"0117\",");
+                datastring.Append("\"ExpDate\":\"0127\",");
                 datastring.Append("\"CardHolder\":{");
                 datastring.Append("\"FirstName\":\"Jason\",");
                  datastring.Append("\"MiddleName\":\"\",");
@@ -58,7 +58,7 @@ namespace Samples.Net40
 
                 // POST
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(datastring.ToString());
-                var url = "https://sandbox.payfabric.com/V3/PayFabric/rest/api/transaction/process";
+                var url = "https://sandbox.payfabric.com/payment/api/transaction/process";
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
@@ -69,6 +69,7 @@ namespace Samples.Net40
                 stream.Write(data, 0, data.Length);
                 stream.Close();
                 HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Stream responseStream = httpWebResponse.GetResponseStream();
                 StreamReader streamReader = new StreamReader(responseStream);
                 string result = streamReader.ReadToEnd();
@@ -129,7 +130,7 @@ namespace Samples.Net40
                 datastring.Append("\"Cvc\":\"1453\",");
                 datastring.Append("\"Tender\":\"CreditCard\",");
                 datastring.Append("\"CardName\":\"MasterCard\",");
-                datastring.Append("\"ExpDate\":\"0117\",");
+                datastring.Append("\"ExpDate\":\"0125\",");
                 datastring.Append("\"CardHolder\":{");
                 datastring.Append("\"FirstName\":\"Jason\",");
                  datastring.Append("\"MiddleName\":\"\",");
@@ -148,7 +149,7 @@ namespace Samples.Net40
 
                 // POST
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(datastring.ToString());
-                var url = "https://sandbox.payfabric.com/V3/PayFabric/rest/api/transaction/process";
+                var url = "https://sandbox.payfabric.com/payment/api/transaction/process";
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
@@ -159,6 +160,7 @@ namespace Samples.Net40
                 stream.Write(data, 0, data.Length);
                 stream.Close();
                 HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Stream responseStream = httpWebResponse.GetResponseStream();
                 StreamReader streamReader = new StreamReader(responseStream);
                 string result = streamReader.ReadToEnd();
@@ -205,12 +207,13 @@ namespace Samples.Net40
         {
             try
             {
-                var url = "https://sandbox.payfabric.com/V3/PayFabric/rest/api/reference/" + originalKey + "?trxtype=Credit";
+                var url = "https://sandbox.payfabric.com/payment/api/reference/" + originalKey + "?trxtype=Credit";
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Headers["authorization"] = new Token().Create();
                 httpWebRequest.Method = "GET";                                   
-                HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse; 
+                HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Stream responseStream = httpWebResponse.GetResponseStream(); 
                 StreamReader streamReader = new StreamReader(responseStream); 
                 string result = streamReader.ReadToEnd(); 
