@@ -29,12 +29,13 @@ namespace Samples.Net40
         {
             try
             {
-                var url = "https://sandbox.payfabric.com/V3/PayFabric/rest/api/wallet/get/" + customer + "?tender=" + tender;
+                var url = "https://sandbox.payfabric.com/payment/api/wallet/get/" + customer + "?tender=" + tender;
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Headers["authorization"] = new Token().Create();
                 HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Stream responseStream = httpWebResponse.GetResponseStream();
                 StreamReader streamReader = new StreamReader(responseStream);
                 string result = streamReader.ReadToEnd();  // JSON result
@@ -71,12 +72,13 @@ namespace Samples.Net40
         {
             try
             {
-                var url = "https://sandbox.payfabric.com/V3/PayFabric/rest/api/wallet/get/" + walletID;
+                var url = "https://sandbox.payfabric.com/payment/api/wallet/get/" + walletID;
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Headers["authorization"] = new Token().Create();
                 HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Stream responseStream = httpWebResponse.GetResponseStream();
                 StreamReader streamReader = new StreamReader(responseStream);
                 string result = streamReader.ReadToEnd();  // JSON result
