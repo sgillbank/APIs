@@ -27,12 +27,13 @@ namespace Samples.Net40
         {
             try
             {
-                var url = "https://sandbox.payfabric.com/V3/PayFabric/rest/api/reference/" + originalKey + "?trxtype=Void";
+                var url = "https://sandbox.payfabric.com/payment/api/reference/" + originalKey + "?trxtype=Void";
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Headers["authorization"] = new Token().Create();
                 httpWebRequest.Method = "GET";                                   
-                HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse; 
+                HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Stream responseStream = httpWebResponse.GetResponseStream(); 
                 StreamReader streamReader = new StreamReader(responseStream); 
                 string result = streamReader.ReadToEnd(); 
