@@ -33,7 +33,7 @@ namespace Samples.Net40
                 StringBuilder datastring = new StringBuilder();
                 datastring.Append("{");
                 datastring.Append("\"ID\":\"d8f265e3-fbae-459d-b04b-857679d35c84\",");
-                datastring.Append("\"ExpDate\":\"0219\",");
+                datastring.Append("\"ExpDate\":\"0223\",");
                 datastring.Append("\"CardHolder\":{");
                 datastring.Append("\"FirstName\":\"newupdate\",");
                 datastring.Append("\"MiddleName\":\"\",");
@@ -53,7 +53,7 @@ namespace Samples.Net40
 
                 // POST
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(datastring.ToString());
-                var url = "https://sandbox.payfabric.com/V3/PayFabric/rest/api/wallet/update";
+                var url = "https://sandbox.payfabric.com/payment/api/wallet/update";
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
@@ -64,6 +64,7 @@ namespace Samples.Net40
                 stream.Write(data, 0, data.Length);
                 stream.Close();
                 HttpWebResponse httpWebResponse = httpWebRequest.GetResponse() as HttpWebResponse;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 Stream responseStream = httpWebResponse.GetResponseStream();
                 StreamReader streamReader = new StreamReader(responseStream);
                 string result = streamReader.ReadToEnd();
