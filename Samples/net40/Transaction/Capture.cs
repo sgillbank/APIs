@@ -94,7 +94,7 @@ namespace Samples.Net40
                 datastring.Append("\"Cvc\":\"1453\",");
                 datastring.Append("\"Tender\":\"CreditCard\",");
                 datastring.Append("\"CardName\":\"MasterCard\",");
-                datastring.Append("\"ExpDate\":\"0117\",");
+                datastring.Append("\"ExpDate\":\"0122\",");
                 datastring.Append("\"CardHolder\":{");
                 datastring.Append("\"FirstName\":\"Jason\",");
                  datastring.Append("\"MiddleName\":\"\",");
