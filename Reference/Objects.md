@@ -16,7 +16,7 @@ Address objects represent the shipping or billing address of a customer. This ob
 | Line3      | String | Street line 3 |nvarchar(128)|
 | Email      | String | Email address|nvarchar(128)|
 | Phone      | String | Phone number |varchar(16)|
-| ModifiedOn | String | Timestamp indicating when this record was last modified.It's format should like "3/23/2015 11:16:19 PM".|datetime,not null|
+| ModifiedOn | String | Timestamp indicating when this record was last modified. It's format should be like "3/23/2015 11:16:19 PM".|datetime, not null|
 | Zip*        | String | Zip code |varchar(16)|
 *Required
 
@@ -44,7 +44,7 @@ The Card object represents a Credit Card or eCheck of a customer.
 | Customer*        | String | Customer ID as specified by the client upon creation of the customer. | nvarchar(128)|  
 | Account*         | String | The number of the credit card, or the eCheck/ACH account. When creating a new Card this attribute must be provided by the client in plaintext. When a client retrieves a card PayFabric always returns this attribute in masked format. **When updating a card omit this field.**|nvarchar(64)|  
 | ExpDate*         | String | Expiration date of the credit card in the format of MMYY. Only valid for credit cards. | varchar(4)| 
-| CVC             | String | CVC code. Only valid for credit cards. |Don't save this cvv2|  
+| CVC             | String | CVC code. Only valid for credit cards. |Never save this CVV2|  
 | CheckNumber*     | String | Check number. Only valid for eChecks. | varchar(128)| 
 | AccountType*     | String | eCheck account type. Only valid for eCheck accounts. | varchar(32)| 
 | Aba*             | String | Bank Routing Number. Only valid for eChecks. | varchar(64)| 
@@ -52,16 +52,16 @@ The Card object represents a Credit Card or eCheck of a customer.
 | IsDefaultCard   | Boolean | Indicates whether this is the primary card of the customer. Default value is ``False``. | bit, not null| 
 | IsLocked        | Boolean | Indicates whether the card is locked. Default value is ``False``.| bit, null |
 | IsSaveCard      | Boolean | Indicates whether to save this card in the customer's wallet. This attribute is only valid and should only be included in the object when using [Create and Process a Transaction](../Sections/Transactions.md#create-and-process-a-transaction). |  
-| ModifiedOn      | String | Timestamp indicating when this record was last modified. It's format should like "3/23/2015 11:16:19 PM".| datetime, not null| 
-| CardHolder*      | [Object](#cardholder) | Cardholder object. |  
-| Billto          | [Object](#address) | Address object. The required rule of address object will apply once if it is not NULL.| 
-| Identifier      | String | A client-defined identifier for this card. Developer can send a flag value to identify this card |  nvarchar(32)|
+| ModifiedOn      | String | Timestamp indicating when this record was last modified. It's format should be like "3/23/2015 11:16:19 PM".| datetime, not null| 
+| CardHolder*      | [Object](#cardholder) | CardHolder object. |  
+| Billto          | [Object](#address) | Address object. The required rule of address object will apply if it is not NULL.| 
+| Identifier      | String | A client-defined identifier for this card. Developer can send a flag value to identify this card.  Also the Credit Card ID use by Microsoft Dynamics GP. |  nvarchar(32)|
 | UserDefine1    | String | User-defined field 1. Developer can store additional data in this field. |nvarchar(256)|  
 | UserDefine2    | String | User-defined field 2. Developer can store additional data in this field. | nvarchar(256)| 
 | UserDefine3    | String | User-defined field 3. Developer can store additional data in this field. |  nvarchar(256)|
 | UserDefine4    | String | User-defined field 4. Developer can store additional data in this field. | nvarchar(256)|
-| Connector       | String | The gateway name defined by PayFabric, Such as FirstData GGe4,Payflowpro, Paymentech. This field will be set only if this card is a tokenized value for a specific gateway, such as FirstData or Paypal|nvarchar(64)|
-| GatewayToken    | String | Gateway token. PayFabric send this value to gateway for processing a transaction|varchar(32)|
+| Connector       | String | The gateway name defined by PayFabric, such as FirstData GGe4, Payflow Pro or Paymentech. This field will be set only if this card is a tokenized value for a specific gateway, such as FirstData or Paypal.|nvarchar(64)|
+| GatewayToken    | String | Gateway token. PayFabric sends this tokenized wallet value to the gateway for processing a transaction.|varchar(32)|
 | IssueNumber     | String | This field is required for UK debit cards|nvarchar(64)|
 | StartDate       | String | This field is required for UK debit cards, format is MMYY.|varchar(4)|
 *Required 
@@ -71,13 +71,13 @@ PayFabric returns the Transaction Response object as the result of most operatio
 
 | Attribute  | DataType| Definition|Max Length|
 | :-----------|:---------| :---------| :---------|
-| TrxKey               | String | PayFabric transaction key. This is generated upon creation of the transaction in the PayFabric server. |varchar(64)| 
+| TrxKey               | String | PayFabric transaction key. This is generated upon creation of the transaction on the PayFabric server. |varchar(64)| 
 | AuthCode             | String | Authorization code. Generated by the Payment Gateway. |varchar(64)| 
 | Status               | String | Status of transaction. Generated by the Payment Gateway. Possible values are ``Approved``, ``Denied``, ``Declined``, ``Failure``, ``AVSFailure``,  and ``More Info``. | varchar(16)| 
 | ResultCode           | String | Result code of the transaction. Generated by the Payment Gateway. |varchar(32)| 
 | Message              | String | Result message of the transaction. Generated by the Payment Gateway. | nvarchar(512)|  
 | OriginationID        | String | Unique identifier for the transaction. Generated by the Payment Gateway. | varchar(128)| 
-| TrxDate              | String | Date of transaction. It's format should like "3/23/2015 11:16:19 PM". | datetime| 
+| TrxDate              | String | Date of transaction. It's format should be like "3/23/2015 11:16:19 PM". | datetime| 
 | RespTrxTag           | String | A tag value which is generated by FirstData, which must be included when submitting a transaction to FirstData. This is only valid if FirstData GGe4 is the Payment Gateway. |  varchar(32)|
 | CVV2Response         | String | Verification status code of CVC code. Generated by the Payment Gateway. |nvarchar(32)|  
 | AVSZipResponse       | String | Verification status code of zip code. Generated by the Payment Gateway. | nvarchar(32)| 
@@ -92,7 +92,7 @@ Simple Transaction Object. This is a lightweight object that only includes the r
 | Key             | String | PayFabric transaction key. This is generated by PayFabric upon creation of the transaction.  | varchar(64)|
 | OriginationID   | String | Unique identifier of the transaction. Generated by the Payment Gateway. |varchar(64)|
 | Status          | String | Status message indicating the status of the transaction. Possible values are ``Approved``, ``Denied``, ``Declined``, ``Failure``, ``AVSFailure``, ``More Info``. |varchar(16)|  
-| TrxDate         | String | Transaction date. It's format should like "3/23/2015 11:16:19 PM". | datetime| 
+| TrxDate         | String | Transaction date. It's format should be like "3/23/2015 11:16:19 PM". | datetime| 
 | Type            | String | Transaction type. The possible values are ``Sale``,``Book``,``Ship``,``Void``,``Credit``,``Force``. | nvarchar(64)|
 
 ## Document
@@ -101,7 +101,7 @@ The Document object is used to represent additional invoice, order, or other Lev
 | Attribute       | DataType| Definition
 | :-----------    |:---------| :---------| 
 | Head            | Array | An array of key-value pairs. Usually, the key-value pairs represent the level 2 fields to submit to the gateway.| 
-| Lines           | Array | An array of columns object.The columns objects represent the columns that belong to a specific line. Usually the columns objects represent the level 3 fields that you can submit to the gateway.|
+| Lines           | Array | An array of Columns objects. The Columns objects represent the columns that belong to a specific line. Usually these Columns objects represent those level 3 fields which you can submit to the gateway.|
 | Columns         | Array | An array of key-value pairs. The key-value pairs represent the level 3 fields to submit to the gateway.|
 | UserDefined     | String | Up to 50 key value pairs can be stored in this object.| 
 
@@ -114,15 +114,15 @@ The Transaction object represents a single transaction that will pass through Pa
 | Attribute  | DataType| Definition|Max Length|
 | :-----------|:---------| :---------| :---------| 
 | Key             | String | PayFabric transaction key. Generated by PayFabric and returned to the client upon creation of the transaction. Omit this field when creating a new transaction.  | varchar(64)|
-| Amount*         | Decimal| Transaction amount, only accept 2 |money|
+| Amount*         | Decimal| Transaction amount. Only accepts two decimals. |currency|
 | Customer*       | String | Customer ID |nvarchar(128)|  
 | Currency*       | String | Currency code, such as ``USD``. |  varchar(16)|
 | Card*  | [Object](#card) | Card object. If you are using an existing card, you only need to specify the ID of the card. If using a new card then all fields are required. |  
 | SetupId*        | String | Gateway account profile name. This name is configurable and is defined by the client on the PayFabric web portal. |nvarchar(64)|  
-| Tender*         | String | Tender type. Valid values are ``CreditCard``, ``ECheck``. |nvarchar(64)|  
+| Tender*         | String | Tender type. Valid values are ``CreditCard`` and ``ECheck``. |nvarchar(64)|  
 | Type*           | String | Transaction type. Valid values are ``Sale``,``Book``,``Ship``,``Void``,``Credit``, ``Force``.  For more information on PayFabric Transaction Types, see our [guide](https://github.com/PayFabric/Portal/wiki/Transaction-Types). |  nvarchar(64)|
 | BatchNumber     | String | Batch number name. For saving this transaction into a PayFabric batch. Merchant can process the batch on PayFabric portal. | varchar(64)| 
-| ModifiedOn      | String | Timestamp indicating when this transaction was last modified. It's format should like "3/23/2015 11:16:19 PM". | datetime| 
+| ModifiedOn      | String | Timestamp indicating when this transaction was last modified. It's format should be like "3/23/2015 11:16:19 PM". | datetime| 
 | Shipto   | [Object](#address)| Address object. |  
 | ReqAuthCode          | String | Required for ``Force`` transactions. |varchar(64)|
 | ReqOriginid          | String | Required for ``Void`` and ``Ship`` transactions. |varchar(64)|
@@ -135,8 +135,8 @@ The Transaction object represents a single transaction that will pass through Pa
 | TrxUserDefine3       | String | User Defined field 3 |nvarchar(256)|
 | TrxUserDefine4       | String | User Defined field 4 |nvarchar(256)|
 | MSO_EngineGUID       | GUID | GUID of gateway account profile for this transaction. Developer can utilize this field|
-| PayDate              | String | A future date to process this transaction. In another word, this transaction won't be processed right away by setting this field. It's format should like "3/23/2015".|datetime|
-| ReferenceKey         | String| The original transaction key if this transaction is a reference transaction |varchar(64)|
+| PayDate              | String | A future date to process this transaction. In other words, this transaction won't be processed immediately when setting this field. It's format should be like "3/23/2015".|datetime|
+| ReferenceKey         | String| The original transaction key being referenced, if this is a reference transaction |varchar(64)|
  
 
 > The Required fields above only apply to transactions that will be submitted to Payment Gateways. If the transaction is only being saved on the PayFabric server (and not being submitted to a Payment Gateway) then none of the fields are required.
