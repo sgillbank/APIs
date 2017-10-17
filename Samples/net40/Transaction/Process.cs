@@ -27,7 +27,7 @@ namespace Samples.Net40
         {
             try
             {
-                var url = "https://sandbox.payfabric.com/V2/Rest/api/transaction/process/" + transactionKey;
+                var url = "https://sandbox.payfabric.com/payment/api/transaction/process/" + transactionKey;
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
@@ -103,7 +103,7 @@ namespace Samples.Net40
                 datastring.Append("\"Cvc\":\"745\",");
                 datastring.Append("\"Tender\":\"CreditCard\",");
                 datastring.Append("\"CardName\":\"Visa\",");
-                datastring.Append("\"ExpDate\":\"0117\",");
+                datastring.Append("\"ExpDate\":\"0127\",");
 
                 // Card Holder
                 datastring.Append("\"CardHolder\":{");
@@ -202,7 +202,7 @@ namespace Samples.Net40
 
                 #endregion
 
-                var url = "https://sandbox.payfabric.com/V2/Rest/api/transaction/process";
+                var url = "https://sandbox.payfabric.com/payment/api/transaction/process";
                 byte[] data = System.Text.Encoding.UTF8.GetBytes(datastring.ToString());
                 HttpWebRequest httpWebRequest = WebRequest.Create(url) as HttpWebRequest;
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
