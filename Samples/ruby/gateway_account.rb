@@ -59,7 +59,7 @@ module PayFabric
       # @return [Gateway Account](https://github.com/PayFabric/APIs/wiki/API-Objects#gateway-account)
       #
       def retrieve(device_id, password, id)
-        url = "https://sandbox.payfabric.com/rest/v1/api/setupid/#{id}"
+        url = "https://sandbox.payfabric.com/payment/api/setupid/#{id}"
         Share::retrieve(url, device_id, password)
       end
     end
@@ -68,12 +68,12 @@ module PayFabric
       extend self 
       # see Sandbox::retrieve_all
       def retrieve_all(device_id, password)
-        url = "https://payfabric.com/rest/v1/api/setupid"
+        url = "https://payfabric.com/payment/api/setupid"
         Share::retrieve_all(url, device_id, password)
       end  
       # see Sandbox::retrieve
       def retrieve(device_id, password, id)
-        url = "https://payfabric.com/rest/v1/api/setupid/#{id}"
+        url = "https://payfabric.com/payment/api/setupid/#{id}"
         Share::retrieve(url, device_id, password)
       end
     end
