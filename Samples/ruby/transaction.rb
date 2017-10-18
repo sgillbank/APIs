@@ -81,7 +81,7 @@ module PayFabric
       #    hash # => {"Key" => "140527000010"}
       # 
       def create(device_id, password, options)
-        url = "https://sandbox.payfabric.com/rest/v1/api/transaction/create"
+        url = "https://sandbox.payfabric.com/payment/api/transaction/create"
         Share::create(url, device_id, password, options)
       end
 
@@ -119,7 +119,7 @@ module PayFabric
       #    hash # => {"Result" => "true"}
       # 
       def update(device_id, password, options)
-        url = "https://sandbox.payfabric.com/rest/v1/api/transaction/update"
+        url = "https://sandbox.payfabric.com/payment/api/transaction/update"
         Share::create(url, device_id, password, options)
       end
 
@@ -151,7 +151,7 @@ module PayFabric
       # @return [Transaction Response](https://github.com/PayFabric/APIs/wiki/API-Objects#transaction-response)
       #  
       def process(device_id, password, trx_key)
-        url = "https://sandbox.payfabric.com/rest/v1/api/transaction/process/#{trx_key}"
+        url = "https://sandbox.payfabric.com/payment/api/transaction/process/#{trx_key}"
         Share::process(url, device_id, password)
       end
 
@@ -189,7 +189,7 @@ module PayFabric
       #
       #  
       def process_object(device_id, password, options)
-        url = "https://sandbox.payfabric.com/rest/v1/api/transaction/process"
+        url = "https://sandbox.payfabric.com/payment/api/transaction/process"
         Share::process_object(url, device_id, password, options)
       end
 
@@ -213,7 +213,7 @@ module PayFabric
       #  @return [Transaction](https://github.com/PayFabric/APIs/wiki/API-Objects#transaction)  
       #
       def retrieve(device_id, password, trx_key)
-        url = "https://sandbox.payfabric.com/rest/v1/api/transaction/#{trx_key}"
+        url = "https://sandbox.payfabric.com/payment/api/transaction/#{trx_key}"
         Share::retrieve(url, device_id, password)   
       end
 
@@ -243,7 +243,7 @@ module PayFabric
       #  @return [Transaction Response](https://github.com/PayFabric/APIs/wiki/API-Objects#transaction-response)
       # 
       def capture(device_id, password, trx_key)
-        url = "https://sandbox.payfabric.com/rest/v1/api/reference/#{trx_key}?trxtype=Ship"
+        url = "https://sandbox.payfabric.com/payment/api/reference/#{trx_key}?trxtype=Ship"
         Share::capture(url, device_id, password)
       end
 
@@ -274,7 +274,7 @@ module PayFabric
       #  @return [Transaction Response](https://github.com/PayFabric/APIs/wiki/API-Objects#transaction-response)   
       #
       def cancel(device_id, password, trx_key)
-        url = "https://sandbox.payfabric.com/rest/v1/api/reference/#{trx_key}?trxtype=Void"
+        url = "https://sandbox.payfabric.com/payment/api/reference/#{trx_key}?trxtype=Void"
         Share::cancel(url, device_id, password)
       end
 
@@ -319,7 +319,7 @@ module PayFabric
       #         }
       #     
       def refund(device_id, password, options) 
-        url = "https://sandbox.payfabric.com/rest/v1/api/transaction/process"
+        url = "https://sandbox.payfabric.com/payment/api/transaction/process"
         Share::process_object(url, device_id, password, options)
       end
     end
@@ -328,42 +328,42 @@ module PayFabric
       extend self 
       # see Sandbox::create
       def create(device_id, password, options)
-        url = "https://payfabric.com/rest/v1/api/transaction/create"
+        url = "https://payfabric.com/payment/api/transaction/create"
         Share::create(url, device_id, password, options)
       end
       # see Sandbox::update
       def update(device_id, password, options)
-        url = "https://payfabric.com/rest/v1/api/transaction/update"
+        url = "https://payfabric.com/payment/api/transaction/update"
         Share::create(url, device_id, password, options)
       end
       # see Sandbox::process
       def process(device_id, password, trx_key)
-        url = "https://payfabric.com/rest/v1/api/transaction/process/#{trx_key}"
+        url = "https://payfabric.com/payment/api/transaction/process/#{trx_key}"
         Share::process(url, device_id, password)
       end
       # see Sandbox::process_object
       def process_object(device_id, password, options)
-        url = "https://payfabric.com/rest/v1/api/transaction/process"
+        url = "https://payfabric.com/payment/api/transaction/process"
         Share::process_object(url, device_id, password, options)
       end
       # see Sandbox::retrieve
       def retrieve(device_id, password, trx_key)
-        url = "https://payfabric.com/rest/v1/api/transaction/#{trx_key}"
+        url = "https://payfabric.com/payment/api/transaction/#{trx_key}"
         Share::retrieve(url, device_id, password)   
       end
       # see Sandbox::capture
       def capture(device_id, password, trx_key)
-        url = "https://payfabric.com/rest/v1/api/reference/#{trx_key}?trxtype=Ship"
+        url = "https://payfabric.com/payment/api/reference/#{trx_key}?trxtype=Ship"
         Share::capture(url, device_id, password)
       end
       # see Sandbox::cancel
       def cancel(device_id, password, trx_key)
-        url = "https://payfabric.com/rest/v1/api/reference/#{trx_key}?trxtype=Void"
+        url = "https://payfabric.com/payment/api/reference/#{trx_key}?trxtype=Void"
         Share::cancel(url, device_id, password)
       end
       # see Sandbox::refund
       def refund(device_id, password, options) 
-        url = "https://payfabric.com/rest/v1/api/transaction/process"
+        url = "https://payfabric.com/payment/api/transaction/process"
         Share::process_object(url, device_id, password, options)
       end
     end
