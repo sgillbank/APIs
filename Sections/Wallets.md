@@ -121,7 +121,7 @@ Update a Credit Card / eCheck
 }
 </pre>
 
-Please note that the **ID** field is the only required field for an update.  Only the fields that need updating should be included, see the **Create Credit Card / eCheck** endpoint for more information.  When updating a Wallet entry, do **not** include the **Account** field.  PayFabric is unable to update the account/card number. To update an account/card number, delete the old Wallet entry and create a new one.
+Please note that the **ID** field is the only required field for an update.  Only the fields that need updating should be included, see the **Create Credit Card / eCheck** endpoint for more information.  When updating a Wallet entry, do **not** include the **Account** field.  PayFabric is unable to update the account/card number. To update an account/card number or its customer, delete the old Wallet entry and create a new one.
 
 ###### Response
 <pre>
@@ -412,7 +412,7 @@ Credit card and account numbers are returned in a masked format. PayFabric never
 Lock Credit Card / eCheck
 -------------------------
 
-* `GET /payment/api/wallet/lock/cbb571ea-e834-41c4-8a20-7d55bb7ae190?lockreason=Customer+being+audited` will lock the credit card or eCheck from being used with a specified reason
+* `GET /payment/api/wallet/lock/cbb571ea-e834-41c4-8a20-7d55bb7ae190?lockreason=Customer+being+audited` will lock the credit card or eCheck from being used with a specified reason.  You may only delete or unlock a locked wallet using the same device which locked it.
 
 ###### Response
 <pre>{
