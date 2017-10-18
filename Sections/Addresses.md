@@ -1,12 +1,12 @@
 Addresses
 =========
 
-The PayFabric Addresses API is used for returning customer shipping addresses which were entered previously.  Please note that all requests require API authentication, see our [guide](Authentication.md) on how to authenticate.
+The PayFabric Addresses API is used for returning customer shipping addresses which were entered previously.  Please note that all requests require API authentication. See our [guide](Authentication.md) on how to authenticate.
 
 Retrieve a Shipping Address
 ---------------------------
 
-* `GET /rest/api/address/75B12D6B-B2C7-409D-89CB-006535D6CD95` will return the specified address
+* `GET /payment/api/address/75B12D6B-B2C7-409D-89CB-006535D6CD95` will return the specified address
 
 ###### Response
 <pre>
@@ -29,7 +29,7 @@ Retrieve a Shipping Address
 Retrieve Shipping Addresses
 ---------------------------
 
-* `GET /rest/api/addresses/John+Doe+Ltd` will return all shipping addresses for the specified customer
+* `GET /payment/api/addresses/John+Doe+Ltd` will return all shipping addresses for the specified customer
  
 ###### Response
 <pre>
@@ -68,7 +68,7 @@ Retrieve Shipping Addresses
 Retrieve Shipping Addresses (Query with Paging)
 -----------------------------------------------
 
-* `GET /rest/api/addresses/get?customer=John+Doe+Ltd&fromDate=01-01-2015&page=1` will return shipping addresses for the specified customer after a specified date
+* `GET /payment/api/addresses/get?customer=John+Doe+Ltd&fromDate=01-01-2015&page=1` will return shipping addresses for the specified customer after a specified date
 
 ###### Response
 <pre>
