@@ -79,7 +79,7 @@ module PayFabric
       #  @return Hash
       # 
       def add(device_id, password, options)
-        url = "https://sandbox.payfabric.com/rest/v1/api/wallet/create"
+        url = "https://sandbox.payfabric.com/payment/api/wallet/create"
         Share::add(url, device_id, password, options)
       end
 
@@ -107,7 +107,7 @@ module PayFabric
       # @return Hash
       #
       def update(device_id, password, options)
-        url = "https://sandbox.payfabric.com/rest/v1/api/wallet/update"
+        url = "https://sandbox.payfabric.com/payment/api/wallet/update"
         Share::update(url, device_id, password, options)
       end
 
@@ -123,7 +123,7 @@ module PayFabric
       #    hash # => {"Result" => "true"}
       # 
       def remove(device_id, password, id)
-        url = "https://sandbox.payfabric.com/rest/v1/api/wallet/delete/#{id}"
+        url = "https://sandbox.payfabric.com/payment/api/wallet/delete/#{id}"
         Share::remove(url, device_id, password)
       end
 
@@ -142,7 +142,7 @@ module PayFabric
       #  @reutrn [Array of Cards](https://github.com/PayFabric/APIs/wiki/API-Objects#card)
       # 
       def retrieve(device_id, password, customer)
-        url = "https://sandbox.payfabric.com/rest/v1/api/wallet/get/#{customer}"
+        url = "https://sandbox.payfabric.com/payment/api/wallet/get/#{customer}"
         Share::retrieve(url, device_id, password)
       end
     end
@@ -150,22 +150,22 @@ module PayFabric
     module Live
       extend self
       def add(device_id, password, options)
-        url = "https://payfabric.com/rest/v1/api/wallet/create"
+        url = "https://payfabric.com/payment/api/wallet/create"
         Share::add(url, device_id, password, options)
       end
 
       def update(device_id, password, options)
-        url = "https://payfabric.com/rest/v1/api/wallet/update"
+        url = "https://payfabric.com/payment/api/wallet/update"
         Share::update(url, device_id, password, options)
       end
 
       def remove(device_id, password, id)
-        url = "https://payfabric.com/rest/v1/api/wallet/delete/#{id}"
+        url = "https://payfabric.com/payment/api/wallet/delete/#{id}"
         Share::remove(url, device_id, password)
       end
 
       def retrieve(device_id, password, customer)
-        url = "https://payfabric.com/rest/v1/api/wallet/get/#{customer}"
+        url = "https://payfabric.com/payment/api/wallet/get/#{customer}"
         Share::retrieve(url, device_id, password)
       end
     end
